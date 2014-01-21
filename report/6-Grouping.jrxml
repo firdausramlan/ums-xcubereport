@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="6-Grouping" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af2e9b96-c869-4cf4-a39d-15042240f8f3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="176"/>
+	<queryString>
+		<![CDATA[SELECT
+  c.`name` as `category`,
+  f.`title`,
+  f.`description`,
+  f.`rental_rate`,
+  f.`last_update`,
+  f.`release_year`
+FROM
+  film f INNER JOIN
+  film_category fc ON (f.`film_id` = fc.`film_id`) INNER JOIN
+  category c ON (c.`category_id` = fc.`category_id`)
+ORDER BY 1]]>
+	</queryString>
+	<field name="category" class="java.lang.String"/>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rental_rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_update" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="release_year" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="rental_rate_1" class="java.math.BigDecimal" resetType="Group" resetGroup="category" calculation="Sum">
+		<variableExpression><![CDATA[$F{rental_rate}]]></variableExpression>
+	</variable>
+	<group name="category">
+		<groupExpression><![CDATA[$F{category}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField evaluationTime="Group" evaluationGroup="category">
+					<reportElement x="8" y="7" width="536" height="37" uuid="31b81565-b07d-4fc1-bdd4-8859b31010f7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="18" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{category} + " (" + $V{category_COUNT} + " items)"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="29">
+				<textField evaluationTime="Group" evaluationGroup="category">
+					<reportElement x="333" y="3" width="221" height="20" uuid="098d6d70-25c6-4437-86f6-51174ccebb6c"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total rental rate: " + $V{rental_rate_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="113" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="187" y="0" width="181" height="79" uuid="21ae12a6-f223-434b-8208-770e088083df"/>
+				<imageExpression><![CDATA["ums_500.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="62" y="86" width="430" height="20" uuid="fe7d6126-6db8-4d1f-906e-a55dd595fc90"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<text><![CDATA[Laporan Kewangan Tahunan Universiti Malaysia Sabah]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="39" y="7" width="240" height="20" uuid="3dfe21d5-8be5-409c-9c94-6614a812de29"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Film Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="7" width="100" height="20" uuid="1d7dd9a7-10b6-4bbf-9448-2c741fde8698"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Release Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="7" width="100" height="20" uuid="8bc265c9-2c25-4827-8ff7-09c3cba3ffbc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Update]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="477" y="7" width="77" height="20" uuid="c60621c4-50e1-4d47-a6d4-499e1b01f70c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rental Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="7" width="37" height="20" uuid="e6a93756-78a9-4787-89c7-dbe631ff2898"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="29" width="555" height="2" uuid="f5b8c624-2159-4ed1-89de-f2d96ad6a746"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="3" width="555" height="1" uuid="b06fd843-dd84-4602-92b6-00571f307ebe"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="39" y="0" width="240" height="20" uuid="0cc440b0-84b3-4304-ae97-150b8e02a31e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="100" height="20" uuid="4a4431fd-8575-422a-a98a-cdead69b1175"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{release_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="100" height="20" uuid="d7e37a97-3d55-4ec9-95bb-a37758632af9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_update}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="477" y="0" width="77" height="20" uuid="03188e4a-329f-4d6b-a35d-dd377ca65123"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rental_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="0" width="37" height="20" uuid="81cf190a-0540-41af-9c73-3e2501bd20cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="0" width="80" height="20" uuid="f03f334c-74b5-4338-99e8-e16171dffbd0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Muka "+$V{PAGE_NUMBER}+" dari"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="0" width="40" height="20" uuid="02c91087-4678-4ed0-ba14-ae0eb52a66c7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="123" y="0" width="87" height="20" uuid="76daacd4-f63e-4242-8429-5ece71722512"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="0" width="119" height="20" uuid="9d3ba3e8-b929-49bf-a63d-197974ad90fb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Laporan ini dijana pada ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="439" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="439" uuid="ebadd848-78d4-417c-adae-ab825e53a05f"/>
+				<mp:map xmlns:mp="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<mp:latitudeExpression><![CDATA[6.0407f]]></mp:latitudeExpression>
+					<mp:longitudeExpression><![CDATA[116.120998f]]></mp:longitudeExpression>
+				</mp:map>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
