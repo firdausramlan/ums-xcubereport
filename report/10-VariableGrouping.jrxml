@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="10-VariableGrouping" language="groovy" columnCount="3" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="185" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af2e9b96-c869-4cf4-a39d-15042240f8f3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="myStyle" mode="Opaque" forecolor="#000099" fontName="DejaVu Sans"/>
+	<style name="rating" fontName="DejaVu Sans">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rating}.equals("G")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#009999">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rating}.equals("PG")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#990099">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rating}.equals("PG-13")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#CCCC00">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rating}.equals("R")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#CC0033">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rating}.equals("NC-17")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#990099">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+	</style>
+	<style name="rental">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rental_rate} < 2]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#00FF33" isBlankWhenNull="true">
+				<box leftPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{rental_rate} >= 2 && $F{rental_rate} < 4)]]></conditionExpression>
+			<style mode="Opaque" forecolor="#666666" backcolor="#FFFF33" isBlankWhenNull="true">
+				<box leftPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{rental_rate} >= 4]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FFFFFF" backcolor="#FF3333" isBlankWhenNull="true">
+				<box leftPadding="2" rightPadding="2"/>
+			</style>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+  c.`Code` as country_code,
+  c.`Name` as country_name
+FROM
+  country c
+ORDER BY 2]]>
+	</queryString>
+	<field name="country_code" class="java.lang.String"/>
+	<field name="country_name" class="java.lang.String"/>
+	<variable name="first_letter" class="java.lang.String" resetType="Group" resetGroup="first_letter">
+		<variableExpression><![CDATA[($F{country_name} == null || $F{country_name}.length() == 0) ? "" : $F{country_name}.substring(0,1)]]></variableExpression>
+	</variable>
+	<group name="first_letter" isStartNewColumn="true">
+		<groupExpression><![CDATA[$V{first_letter}]]></groupExpression>
+		<groupHeader>
+			<band height="60">
+				<textField evaluationTime="Auto">
+					<reportElement style="myStyle" x="2" y="0" width="121" height="60" uuid="9d1d4e01-eaea-4ff6-bed9-a03134992a2d"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="44"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{first_letter}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="77" y="201" width="400" height="400" uuid="dec87507-6744-4de6-83f8-39ce64726a5e"/>
+				<imageExpression><![CDATA["/Users/firdaus/Dropbox/Work's Documents/Projects/UMS/report/ums_500_wm.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="113" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="187" y="0" width="181" height="79" uuid="21ae12a6-f223-434b-8208-770e088083df"/>
+				<imageExpression><![CDATA["ums_500.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="62" y="86" width="430" height="20" uuid="fe7d6126-6db8-4d1f-906e-a55dd595fc90"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<text><![CDATA[Laporan Kewangan Tahunan Universiti Malaysia Sabah]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="40" height="20" uuid="373ccd22-82d8-4eb3-ad7b-62571c216bd9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{country_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="0" width="100" height="20" uuid="6c10f019-6509-4753-a777-142740a8d490"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{country_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="0" width="80" height="20" uuid="f03f334c-74b5-4338-99e8-e16171dffbd0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Muka "+$V{PAGE_NUMBER}+" dari"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="0" width="40" height="20" uuid="02c91087-4678-4ed0-ba14-ae0eb52a66c7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="123" y="0" width="87" height="20" uuid="76daacd4-f63e-4242-8429-5ece71722512"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="0" width="119" height="20" uuid="9d3ba3e8-b929-49bf-a63d-197974ad90fb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Laporan ini dijana pada ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="439" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="439" uuid="ebadd848-78d4-417c-adae-ab825e53a05f"/>
+				<mp:map xmlns:mp="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<mp:latitudeExpression><![CDATA[6.0407f]]></mp:latitudeExpression>
+					<mp:longitudeExpression><![CDATA[116.120998f]]></mp:longitudeExpression>
+				</mp:map>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

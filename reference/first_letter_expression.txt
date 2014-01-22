@@ -1,0 +1,14 @@
+($F{country_name} == null || $F{country_name}.length() == 0) ? "" : $F{country_name}.substring(0,1)
+
+
+
+
+if($F{country_name} == null || $F{country_name}.length() == 0){
+
+  return "";
+
+} else {
+
+  return $F{country_name}.substring(0,1);
+
+}
