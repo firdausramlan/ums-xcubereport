@@ -12,3 +12,13 @@ if($F{country_name} == null || $F{country_name}.length() == 0){
   return $F{country_name}.substring(0,1);
 
 }
+
+
+
+SELECT
+  c.`Continent`,
+  c.`Region`,
+  c.`GNP`
+FROM
+  country c
+ORDER BY 1, 2
