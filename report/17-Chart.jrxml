@@ -157,10 +157,8 @@ GROUP BY 1]]>
 				<pieDataset>
 					<keyExpression><![CDATA[$F{Continent}]]></keyExpression>
 					<valueExpression><![CDATA[$F{totalPopulation}]]></valueExpression>
-					<labelExpression><![CDATA[$F{Continent} + "(" + ($F{totalPopulation} / $V{world_population} * 100)  + "%)"
-]]></labelExpression>
 				</pieDataset>
-				<pie3DPlot>
+				<pie3DPlot labelFormat="{0} ({2})" legendLabelFormat="{0}">
 					<plot/>
 					<itemLabel/>
 				</pie3DPlot>
