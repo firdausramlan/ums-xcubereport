@@ -1,4 +1,1 @@
-<!---
-  Created by firdaus on 1/20/14.
---->
-
+<cfdump var="#Server#" />
